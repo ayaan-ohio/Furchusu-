@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Access Node_04</title>
+<style>
+  body { background: black; color: #0f0; font-family: "Courier New", monospace; text-align: center; padding-top: 100px; }
+  input { background: black; border: 1px solid #0f0; color: #0f0; padding: 8px; font-family: inherit; }
+  button { background: none; border: 1px solid #0f0; color: #0f0; padding: 8px 12px; margin-left:8px; font-family: inherit; cursor:pointer; }
+  p { margin-top: 14px; }
+</style>
+</head>
+<body>
+  <h2>[ ACCESS NODE_04 ]</h2>
+  <p>Enter the key to unlock transmission.</p>
+  <input id="key" type="password" placeholder="••••••••">
+  <button id="enterBtn">ENTER</button>
+  <p id="msg" aria-live="polite"></p>
+
+  <script>
+    const PASS = 'hideheiscoming'; // ← passphrase set as requested
+    const DRIVE = 'https://drive.google.com/drive/folders/1-Uz_ogAbsqKxUp3z6KoYk_CBBW2BuLIJ'; // your folder
+
+    document.getElementById('enterBtn').addEventListener('click', () => {
+      const v = (document.getElementById('key').value || '').trim();
+      if(!v) { document.getElementById('msg').textContent = 'ENTER KEY'; return; }
+      if(v === PASS) {
+        // redirect to the Drive folder
+        window.location.href = DRIVE;
+      } else {
+        document.getElementById('msg').textContent = 'ACCESS DENIED';
+      }
+    });
+
+    // allow Enter key
+    document.getElementById('key').addEventListener('keydown', (e) => {
+      if(e.key === 'Enter') document.getElementById('enterBtn').click();
+    });
+  </script>
+</body>
+</html>
